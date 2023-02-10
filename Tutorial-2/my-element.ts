@@ -16,13 +16,12 @@ class MyElement extends LitElement {
     return html`
       <p>A few of my favorite things</p>
       <ul>
-        <!-- TODO: Add click event handlers for the delete button  below. -->
         ${map(
           this.things,
           (thing, index) => html`
             <li>
               ${thing}
-              <button>Delete</button>
+              <button @click=${() => this._deleteThing(index)}>Delete</button>
             </li>
           `
         )}
@@ -30,5 +29,7 @@ class MyElement extends LitElement {
     `;
   }
 
-  // TODO: Implement method to delete an item.
+  private _deleteThing(index: number) {
+    this.things = this.things.filter((_, i) => i !== index);
+  }
 }
