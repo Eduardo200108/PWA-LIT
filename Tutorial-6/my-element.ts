@@ -1,27 +1,31 @@
-import {LitElement, html, PropertyValues} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {LitElement, html, css, PropertyValues, PropertyValueMap} from 'lit';
+import {customElement, state, query} from 'lit/decorators.js';
 
 @customElement('my-element')
 export class MyElement extends LitElement {
-  @property() forward = '';
-  @property() backward = '';
-
-  onInput(e: Event) {
-    const inputEl = e.target as HTMLInputElement;
-    if (inputEl.id === 'forward') {
-      this.forward = inputEl.value;
-    } else {
-      this.backward = inputEl.value;
+  static styles = css`
+    :host {
+      display: block;
     }
-  }
+    #message {
+      position: fixed;
+      background-color: cornflowerblue;
+      color: white;
+      padding: 10px;
+    }
+  `;
+  @state()
+  _showMessage = false;
+
+  @query('#message')
+  _message!: HTMLDivElement;
 
   render() {
     return html`
-      <label>Forward: <input id="forward" @input=${this.onInput} .value=${this.forward}></label>
-      <label>Backward: <input id="backward" @input=${this.onInput} .value=${this.backward}></label>
-      <div>Forward text: ${this.forward}</div>
-      <div>Backward text: ${this.backward}</div>
+      <button @click=${() => this._showMessage = !this._showMessage}>Click me</button>
+      <div id="message" ?hidden=${!this._showMessage}>
+        TADA
+      </div>
     `;
   }
 }
-
