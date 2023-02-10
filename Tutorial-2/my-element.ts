@@ -1,30 +1,28 @@
 import {LitElement, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {map} from 'lit/directives/map.js'
-// TODO: import repeat directive.
+import {map} from 'lit/directives/map.js';
 
 @customElement('my-element')
 class MyElement extends LitElement {
   @state()
-  tasks = [
-    { id: 'a', label: 'Learn Lit'},
-    { id: 'b', label: 'Feed the cat'},
-    { id: 'c', label: 'Go for a walk'},
-    { id: 'd', label: 'Take a nap'},
-  ]
+  things = [
+    "Raindrops on roses",
+    "Whiskers on kittens",
+    "Bright copper kettles",
+    "Warm woolen mittens",
+  ];
 
   render() {
     return html`
-      <p>Things to do today:</p>
-      <button @click=${() => this._sort(1)}>Sort ascending</button>
-      <button @click=${() => this._sort(-1)}>Sort descending</button>
+      <p>A few of my favorite things</p>
       <ul>
-        <!-- TODO: Replace below using repeat directive. -->
+        <!-- TODO: Add click event handlers for the delete button  below. -->
         ${map(
-          this.tasks,
-          (task) => html`
+          this.things,
+          (thing, index) => html`
             <li>
-              <label><input type="checkbox" />${task.id}) ${task.label}</label>
+              ${thing}
+              <button>Delete</button>
             </li>
           `
         )}
@@ -32,8 +30,5 @@ class MyElement extends LitElement {
     `;
   }
 
-  private _sort(dir: number) {
-    this.tasks.sort((a, b) => a.label.localeCompare(b.label) * dir);
-    this.requestUpdate();
-  }
+  // TODO: Implement method to delete an item.
 }
