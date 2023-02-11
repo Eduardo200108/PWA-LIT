@@ -14,7 +14,7 @@ class MyElement extends LitElement {
 
   render() {
     return html`
-      ⋮
+      <p>A few of my favorite things</p>
       <ul>
         ${map(
           this.things,
@@ -27,5 +27,9 @@ class MyElement extends LitElement {
         )}
       </ul>
     `;
+  }
+
+  private _deleteThing(index: number) {
+    this.things = this.things.filter((_, i) => i !== index);
   }
 }
