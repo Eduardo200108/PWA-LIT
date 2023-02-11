@@ -1,5 +1,5 @@
 import {LitElement, html} from 'lit';
-import {customElement} from 'lit/decorators.js';
+import {customElement, property} from 'lit/decorators.js';
 import {styles} from './styles.js';
 
 @customElement('motion-carousel')
@@ -9,7 +9,7 @@ export class MotionCarousel extends LitElement {
   render() {
     return html`
       <div class="fit">
-
+        <slot></slot>
       </div>
     `;
   }
