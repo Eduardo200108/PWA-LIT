@@ -1,3 +1,4 @@
+/* playground-fold */
 import {LitElement, html, PropertyValues, noChange} from 'lit';
 import {customElement, property, query} from 'lit/decorators.js';
 import {animate} from '@lit-labs/motion';
@@ -36,7 +37,7 @@ export class MotionCarousel extends LitElement {
     const atStart = p === 0;
     const toStart = s === 0;
     const atEnd = p === this.maxSelected;
-    const toEnd = s === this.maxSelected;
+    const toEnd = s == this.maxSelected;
     const shouldAdvance = shouldMove &&
       (atEnd ? toStart : atStart ? !toEnd : s > p);
     const delta = (shouldMove ? Number(shouldAdvance) || -1 : 0) * 100;
@@ -95,3 +96,4 @@ export class MotionCarousel extends LitElement {
   }
 
 }
+/* playground-fold-end */
