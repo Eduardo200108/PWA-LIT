@@ -1,17 +1,16 @@
 import {LitElement, html} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-// TODO: import map directive.
 
 @customElement('my-element')
 class MyElement extends LitElement {
   @state()
-  items = new Set(['Apple', 'Banana', 'Grape', 'Orange', 'Lime'])
+  names = ['Chandler', 'Phoebe', 'Joey', 'Monica', 'Rachel', 'Ross'];
 
   render() {
     return html`
-      <p>My unique fruits</p>
+      <p>A list of names that include the letter "e"</p>
       <ul>
-        <!-- TODO: Utilize map directive to render items. -->
+        <!-- TODO: Render list items of filtered names. -->
       </ul>
     `;
   }
