@@ -1,35 +1,27 @@
 import {LitElement, html} from 'lit';
-import {customElement, state} from 'lit/decorators.js';
-import {map} from 'lit/directives/map.js';
+import {customElement} from 'lit/decorators.js';
 
 @customElement('my-element')
 class MyElement extends LitElement {
-  @state()
-  things = [
-    "Raindrops on roses",
-    "Whiskers on kittens",
-    "Bright copper kettles",
-    "Warm woolen mittens",
-  ];
-
   render() {
     return html`
-      <p>A few of my favorite things</p>
-      <ul>
-        ${map(
-          this.things,
-          (thing, index) => html`
-            <li>
-              ${thing}
-              <button @click=${() => this._deleteThing(index)}>Delete</button>
-            </li>
-          `
-        )}
-      </ul>
+      <h1>Rendering lists with Lit</h1>
+      <p>Lit has built-in support for any iterables!</p>
+      <h2>Array</h2>
+      <p>
+        ${['✨', '🔥', '❤️']}
+      </p>
+      <h2>Set</h2>
+      <p>
+        ${new Set(['A', 'B', 'C'])}
+      </p>
+      <h2>Generator</h2>
+      <p>
+        ${(function* () {
+            for (let i = 1; i < 4; i++) yield i;
+        })()}
+      </p>
     `;
   }
-
-  private _deleteThing(index: number) {
-    this.things = this.things.filter((_, i) => i !== index);
-  }
 }
+
