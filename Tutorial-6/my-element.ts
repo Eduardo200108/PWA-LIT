@@ -1,48 +1,26 @@
-import {LitElement, html, css, PropertyValues} from 'lit';
-import {customElement, property, state} from 'lit/decorators.js';
-import {classMap} from 'lit/directives/class-map.js';
-import {animate} from '@lit-labs/motion';
+import {LitElement, html, PropertyValues} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 
 @customElement('my-element')
 export class MyElement extends LitElement {
-  @property({type: Boolean}) big = false;
-  @property({type: Number}) duration = 500;
-  @state() _renderCount = 0;
+  @property() forward = '';
+  @property() backward = '';
 
-  static styles = css`
-    .bar {
-      background: red;
-      height: 2em;
-      width: 10vw;
+  onInput(e: Event) {
+    const inputEl = e.target as HTMLInputElement;
+    if (inputEl.id === 'forward') {
+      this.forward = inputEl.value;
+    } else {
+      this.backward = inputEl.value;
     }
-
-    .big {
-      width: 50vw;
-    }
-  `;
-
-  setDuration(e: Event) {
-    const v = (e.target as HTMLSelectElement).value;
-    this.duration = Number.parseInt(v);
   }
 
-
   render() {
-    this._renderCount++;
-    const keyframeOptions = { duration: this.duration };
-
     return html`
-      <p>
-        <button @click=${() => (this.big = !this.big)}>Animate</button>
-      </p>
-      <p>
-        <label>Speed <select @change=${this.setDuration}>
-          <option value="250" selected>Fast</option>
-          <option value="1500">Slow</option>
-        </select></label>
-        Render count: ${this._renderCount}
-      </p>
-      <p class="bar ${classMap({big: this.big})}" ${animate({keyframeOptions})}></p>
+      <label>Forward: <input id="forward" @input=${this.onInput} .value=${this.forward}></label>
+      <label>Backward: <input id="backward" @input=${this.onInput} .value=${this.backward}></label>
+      <div>Forward text: ${this.forward}</div>
+      <div>Backward text: ${this.backward}</div>
     `;
   }
 }
